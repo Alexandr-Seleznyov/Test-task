@@ -118,7 +118,7 @@ textarea, input[type="text"], input[type="number"], input[type="url"] {
 }
 
 
-textarea[name="icon"], textarea[name="description"] {
+textarea[name="icon"], .service-info textarea[name="description"], .offer-info textarea[name="description"] {
     display: none;
 }
 
