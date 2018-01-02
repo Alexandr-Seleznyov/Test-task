@@ -1,0 +1,237 @@
+@import url(reset.css);
+
+$font-semi: ProximaNovaSemibold, Arial;
+$font-bold: ProximaNovaBold, Arial;
+$font-extra: ProximaNovaExtraBold, Arial;
+$color-main: #00ac98;
+// $max-width: 750px;
+$max-width: 570px;
+
+@import 'service-block';
+@import 'offer-block';
+
+* {
+    transition: all .2s;
+}
+
+body {
+    font-family: $font-extra;
+}
+
+@font-face {
+    font-family: ProximaNovaSemibold;
+    src: url(../../fonts/task/ProximaNovaSemiBold/proximanova-semibold.woff);
+}
+
+@font-face {
+    font-family: ProximaNovaBold;
+    src: url(../../fonts/task/ProximaNovaBold/proximanova-bold.woff);
+}
+
+@font-face {
+    font-family: ProximaNovaExtraBold;
+    src: url(../../fonts/task/ProximaNovaExtraBold/proximanova-extrabold.ttf);
+}
+
+h1 {
+    display: block;
+    max-width: $max-width;
+    font-size: 20px;
+    margin: auto;
+}
+
+h3 {
+    font-family: $font-bold;
+    font-size: 15px;
+}
+
+.container {
+    margin: 25px;
+    padding-top: 30px;
+    .selected {
+        display: block;
+    }
+}
+
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin-left: -25px;
+    padding: 10px 0;
+    background: #fff;
+    border-bottom: 2px solid #A3A3A3;
+    .menu {
+        display: block;
+        height: 30px;
+        width: 400px;
+        margin: auto;
+        li {
+            float: left;
+            display: block;
+            margin-left: 50px;
+            margin-top: 4px;
+            p {
+                font-size: 20px;
+                cursor: pointer;
+            }
+            .selected {
+                color: $color-main;
+            }
+        }
+    }
+}
+
+
+input[type="submit"] {
+    width: 150px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 5px;
+    font-family: $font-bold;
+    font-size: 20px;
+}
+
+input[name="del"] {
+    color: #990000;
+}
+
+div[class*="-info"] {
+    display: none;
+    border: 1px solid #E0E0E0;
+    padding: 20px;
+    background: #F7F7F7;
+}
+
+
+textarea, input[type="text"], input[type="number"], input[type="url"] {
+    overflow: hidden;
+    // overflow: auto;
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-family: $font-semi;
+    font-size: 14px;
+    color: #5C5C5C;
+}
+
+
+textarea[name="icon"], textarea[name="description"] {
+    display: none;
+}
+
+textarea[name*="description"] {
+    width: 50%;
+}
+
+input[name="order"] {
+    width: 20%;
+}
+
+input[type="checkbox"] {
+    float: left;
+}
+
+textarea[name="SVG"] {
+    height: 90px;
+
+    display: block;
+
+    cursor: pointer;
+    font-size: 60px;
+    overflow: auto;
+    // overflow: scroll;
+
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-attachment: local;
+}
+
+
+
+.message {
+    display: block;
+    height: 25px;
+    margin-top: 10px;
+    padding-left: 10px;
+    color: #17084C;
+    font-family: $font-semi;
+    font-size: 14px;
+    line-height: 25px;
+    border: 1px solid #E0E0E0;
+}
+
+.main-wrapper {
+    max-width: $max-width;
+    margin:auto
+}
+
+.offer-block {
+    padding-bottom: 20px;
+}
+
+
+
+.service, .offer {
+    border: 1px solid #A3A3A3;
+    overflow: hidden;
+    // max-width: $max-width;
+    width: $max-width;
+    // width: 570px;
+    padding: 30px;
+    margin: 20px auto;
+    background: #fff;
+    .result {
+        width: 170px;
+        min-height: 220px;
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        .service-block {
+            width: 100%;
+            a {
+                margin-top: 20px;
+                margin-bottom: 30px;
+            }
+        }
+    }
+    .edit {
+        float: left;
+        display: inline-block;
+        padding: 20px;
+        border: 1px solid #E0E0E0;
+        background: #F7F7F7;
+    }
+}
+
+
+.offer .result {
+    width: 100%;
+    .offer-block {
+        width: 100%;
+    }
+}
+
+
+.service:after {
+  display: block;
+  content: '';
+  height: 0;
+  clear: both;
+}
+
+
+.offer:after {
+  display: block;
+  content: '';
+  height: 0;
+  clear: both;
+}
+
+
+.offer-info {
+    display: none;
+    border: 1px solid red; // ------------ TMP
+}

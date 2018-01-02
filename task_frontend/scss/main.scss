@@ -1,0 +1,404 @@
+@import url(reset.css);
+
+$font-semi: ProximaNovaSemibold, Arial;
+$font-bold: ProximaNovaBold, Arial;
+$font-extra: ProximaNovaExtraBold, Arial;
+$color-main: #00ac98;
+
+@import 'service-block';
+@import 'offer-block';
+
+
+a {
+    text-decoration: none;
+}
+
+* {
+  transition: all .2s;
+}
+
+@font-face {
+    font-family: ProximaNovaSemibold;
+    src: url(../../fonts/task/ProximaNovaSemiBold/proximanova-semibold.woff);
+}
+
+@font-face {
+    font-family: ProximaNovaBold;
+    src: url(../../fonts/task/ProximaNovaBold/proximanova-bold.woff);
+}
+
+@font-face {
+    font-family: ProximaNovaExtraBold;
+    src: url(../../fonts/task/ProximaNovaExtraBold/proximanova-extrabold.ttf);
+}
+
+
+.container {
+    display: block;
+    max-width: 2000px;
+    min-width: 306px; // Фактическое значение - 320px в IE10
+}
+
+// ============================================================================
+// Анимация
+// ============================================================================
+
+// =============== Loader ==================
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.header .logo {
+    position: relative;
+    .wrapper-loader {
+        position: absolute;
+        width: 63px;
+        height: 63px;
+        left: -6px;
+        top: -12px;
+        div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparentize($color-main, 0.7);
+            border-right: none;
+            border-bottom: none;
+
+            animation-name: spin;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        .loader-1 {
+            animation-duration: 1.5s;
+        }
+        .loader-2 {
+            animation-duration: 2s;
+            animation-direction: reverse;
+        }
+    }
+}
+
+@media only screen and (max-width: 1212px) {
+    .header .logo .wrapper-loader {
+        width: 50px;
+        height: 50px;
+        top: -10px;
+    }
+}
+
+
+// =============== Icons ==================
+.service-block a:hover,
+.offer-block a:hover{
+    margin-top: 5px;
+    margin-bottom: -5px;
+}
+
+
+
+
+// ============================================================================
+// HEADER
+// ============================================================================
+.header {
+
+    // position: fixed;
+
+    height: 40px;
+    margin-top: 34px;
+    .logo {
+        height: 100%;
+        width: 161px;
+        float: left;
+        background-image: url(../../img/task/logo.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        .logo-text {
+            height: 100%;
+            width: 94px;
+            float: right;
+            padding-top: 1px;
+            font-family: $font-extra;
+            font-size: 22px;
+            letter-spacing: -1px;
+            color: #000;
+            span {
+                font-size: 35px;
+                line-height: 10px;
+            }
+        }
+    }
+    .menu {
+        height: 100%;
+        display: inline-block;
+        float: right;
+        list-style: none;
+        li {
+            float: left;
+            height: 35px;
+            a {
+                display: inline-block;
+                height: 100%;
+                margin-left: 52px;
+                margin-top: 3px;
+                line-height: 43px;
+                text-decoration: none;
+                font-family: $font-extra;
+                font-size: 17px;
+                color: #000;
+            }
+            .selected {
+                background-image: url(../../img/task/Rectangle.svg);
+                background-repeat: no-repeat;
+                background-size: 15px;
+                color: $color-main;
+            }
+        }
+    }
+    .menu-button {
+        display: none;
+        width: 25px;
+        height: 21px;
+        float: right;
+        margin-right: 3px;
+        margin-top: 7px;
+        padding-top: 2px;
+        cursor: pointer;
+        span {
+            width: 18px;
+            height: 2px;
+            display: block;
+            margin: 3px auto;
+            background-color: #1e0e00;
+        }
+        span:nth-child(2) {
+            width: 17px;
+        }
+    }
+}
+
+// =============== Menu ==================
+.menu li a:hover {
+    padding-top: 5px;
+}
+
+
+
+// ============================================================================
+// SERVICE
+// ============================================================================
+.service-header {
+    text-align: center;
+    .service-title{
+        // padding-top: 145px; // js
+        padding-left: 5px;
+        font-family: $font-extra;
+        // font-size: 100px; // js
+        span {
+            color: $color-main;
+        }
+    }
+    .service-description {
+        // height: 185px; // js
+        // padding-top: 97px;  // js
+        font-family: $font-extra;
+        // font-size: 20px;  // js
+        color: #575757;
+        p:nth-child(1) {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+// @import 'service-block';
+
+
+// clearfix
+.service-content:after {
+  display: block;
+  content: '';
+  height: 0;
+  clear: both;
+}
+
+
+
+
+// ============================================================================
+// our offer
+// ============================================================================
+.offer-header {
+    height: 152px;
+    padding-top: 33px;
+    p {
+        padding-left: 3px;
+        font-family: $font-extra;
+        font-size: 60px;
+        text-align: center;
+        span {
+            color: $color-main;
+        }
+    }
+}
+
+.offer-content {
+    padding-left: 116px;
+    padding-right: 116px;
+}
+
+// @import 'offer-block';
+
+
+
+// clearfix
+.offer-content:after {
+  display: block;
+  content: '';
+  height: 0;
+  clear: both;
+}
+
+
+// ============================================================================
+// FOOTER
+// ============================================================================
+.footer {
+    height: 119px; // 112
+    width: 100%;
+    margin-top: 66px;
+    background: #000000; // ---------- РАЗКОММЕНТ
+    p {
+        display: inline-block;
+        margin-left: 40px;
+        margin-right: 40px;
+        padding-top: 50px;
+        text-align: center;
+        font-family: $font-bold;
+        font-size: 14px;
+        line-height: 20px;
+        color: #fff;
+        span {
+            font-family: $font-extra;
+            color: #20aa97;
+        }
+    }
+}
+
+
+
+
+// ============================================================================
+// Элементы фона
+// ============================================================================
+body {
+
+    background:
+        url(../../img/task/Ellipse_3_copy.svg)
+        no-repeat
+        -343px 512px,
+
+        url(../../img/task/Ellipse_3_copy_2.svg)
+        no-repeat
+        -343px 2026px,
+
+        url(../../img/task/Ellipse_3_copy_3.svg)
+        no-repeat
+        1432px 2071px;
+
+    background:
+        url(../../img/task/Ellipse_3.png)
+        no-repeat
+        top -21px
+        right -100px;
+
+}
+
+
+// ============================================================================
+/*Эти стили применятся только тогда, когда ширина окна меньше 1212px*/
+// ============================================================================
+@media only screen and (max-width: 1212px) {
+    .header {
+        height: 31px;
+        margin-top: 14px;
+        margin-left: -2px;
+        .logo {
+            width: 146px;
+            .logo-text {
+                padding-top: 0px;
+                font-size: 17.5px;
+                line-height: 13px;
+            }
+        }
+        .menu {
+                display: none;
+                width: 100%;
+                height: auto;
+                background-color: rgba(255, 255, 255, .98);
+                li {
+                    float: none;
+                    margin: 20px 0;
+                }
+        }
+        .menu-button {
+            display: inline-block;
+        }
+    }
+
+    .service-header {
+        text-align: left;
+        .service-title{
+            padding-left: 9px;
+        }
+        .service-description {
+            padding-left: 9px;
+            font-family: $font-bold;
+            line-height: 30px;
+            p:nth-child(1) {
+                margin-bottom: 30px;
+            }
+        }
+    }
+
+    .offer-header {
+        padding-top: 18px;
+        p {
+            padding-left: 10px;
+            text-align: left;
+        }
+    }
+
+    .offer-content {
+        .offer-block {
+            padding-bottom: 33px;
+            .wrapper {
+                a {
+                    margin-left: 15px;
+                }
+                .txt {
+                    padding-top: 23px;
+                    font-size: 15.6px;
+                    span {
+                        font-size: 19px;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        height: 112px;
+        margin-top: 28px;
+        p {
+            padding-top: 35px;
+            font-size: 12px;
+        }
+    }
+
+}

@@ -1,0 +1,40 @@
+.offer-block {
+    // width: 658px; // js
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom: 66px;
+    min-width: 282px;
+    .wrapper {
+        // margin-left: 62px; // js
+        // margin-right: 62px; // js
+        a {
+            display: inline-block;
+            height: 107px;
+            width: 107px;
+            margin-left: 5px;
+            background: 
+                url(../../img/task/Ellipse_our_offer.svg)
+                no-repeat;
+            background-size: 105px;
+            img {
+                display: block;
+                margin: auto;
+                height: 50px;
+                margin-top: 25px;
+            }
+        }
+        .txt {
+            padding-top: 39px;
+            font-family: $font-semi;
+            font-size: 18.5px;
+            color: #585858;
+            line-height: 25px;
+            span {
+                font-family: $font-extra;
+                font-size: 22px;
+                color: #000;
+            }
+        }
+    }
+}

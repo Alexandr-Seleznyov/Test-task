@@ -1,0 +1,28 @@
+.service-block {
+    min-width: 141px;
+    // width: 100%;  // js
+    display: inline-block;
+    vertical-align: top;
+    a {
+        display: inline-block;
+        img {
+            display: block;
+            margin: auto;
+            height: 70px;
+        }
+    }
+    .txt {
+        // padding-top: 49px; // js
+        font-family: $font-semi;
+        // font-size: 19px;  // js
+        color: #585858;
+        text-align: center;
+        letter-spacing: -1px;
+        line-height: 24px;
+        span {
+            font-family: $font-extra;
+            // font-size: 21px;  // js
+            color: #000;
+        }
+    }
+}
