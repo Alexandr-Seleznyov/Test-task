@@ -1,2 +1,2 @@
-#### Краткое руководство
-Находится в файле [<b>readmy.pdf</b>](https://github.com/Alexandr-Seleznyov/Test-task/blob/master/readmy.pdf)
+#### РљСЂР°С‚РєРѕРµ СЂСѓРєРѕРІРѕРґСЃС‚РІРѕ
+РќР°С…РѕРґРёС‚СЃСЏ РІ С„Р°Р№Р»Рµ [<b>readmy.pdf</b>](https://github.com/Alexandr-Seleznyov/Test-task/blob/master/readmy.pdf)
