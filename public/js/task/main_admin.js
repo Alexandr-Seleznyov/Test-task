@@ -539,7 +539,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
             xhr.timeout = 10000;
             xhr.open('POST', 'api', true);
-            xhr.send(JSON.stringify(obj_request));
+            // xhr.send(JSON.stringify(obj_request));
+            xhr.send(JSON.stringify(data));
 
         } else {
 
