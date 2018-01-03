@@ -135,7 +135,7 @@ textarea, input[type="text"], input[type="number"], input[type="url"] {
   font-size: 14px;
   color: #5C5C5C; }
 
-textarea[name="icon"], .service-info textarea[name="description"], .offer-info textarea[name="description"] {
+textarea[name="icon"], .service-info textarea[name="description"] {
   display: none; }
 
 textarea[name*="description"] {
