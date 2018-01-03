@@ -129,6 +129,10 @@ textarea[name*="description"] {
     width: 50%;
 }
 
+.offer-info textarea[name="description"]{
+    width: 100%;
+}
+
 input[name="order"] {
     width: 20%;
 }

@@ -33,12 +33,12 @@
 <div class="container">
     <div class="header">
         <ul class="menu">
-            <li><p info="main-info">main</p></li>
-            <li><p info="service-info" class = "selected">service</p></li>
+            <li><p info="main-info" class="selected">main</p></li>
+            <li><p info="service-info">service</p></li>
             <li><p info="offer-info">our offer</p></li>
         </ul>
     </div>
-    <div class="main-info">
+    <div class="main-info selected">
         <h1>Main information:</h1>
         <div class="main-wrapper">
             <form method="POST" action="" name=<?= '"ajaxForm-main-'.$mainInfo[0]['id'].'"' ?>> <br />
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <div class="service-info selected">
+    <div class="service-info">
         <h1>Service information:</h1>
 
 <?php foreach($blockService as $bs) { ?>
