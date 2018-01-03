@@ -744,9 +744,13 @@ document.addEventListener("DOMContentLoaded", function(){
     // ======================================================================================
     // Вставка SVG через textArea
     // ======================================================================================
+    //   Не для IE
     // - Создание множественного фона (матрица)
     // - Обработка событий мышки по секторам этого фона
-    // - Загрузка новой SVG иконки в TextArea
+
+    //   Для IE:
+    // - Оборачиваем иконки в img, добавляем их в TextArea (Работает толоко для IE, что нам и надо)
+    // - Обработка событий мышки
 
 
 
@@ -754,6 +758,7 @@ document.addEventListener("DOMContentLoaded", function(){
     var textAriaSVG = function(){
         var textAreaAll = document.querySelectorAll('textarea[name="SVG"]'),
             textAreaIcon,
+            imgIE = [],
             positionX,
             positionY,
             countIconX = 0,
@@ -764,70 +769,155 @@ document.addEventListener("DOMContentLoaded", function(){
             arrayY = [],
 
             // Параметры иконок (CSS) (значения в px):
-            sizeX = 71,
-            sizeY = 71,
+            sizeX = 50,
+            sizeY = 50,
             paddingXY = 15,
             backImage = '',
-            backPosition = '';
+            backPosition = '',
+            isIE;               // true - значит IE
+
+
+
+        // Определяем isIE
+        (function() {
+            var rv = -1;
+            if (navigator.appName == 'Microsoft Internet Explorer') {
+                var ua = navigator.userAgent;
+                var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+                if (re.exec(ua) != null)
+                    rv = parseFloat( RegExp.$1 );
+            }
+            else if (navigator.appName == 'Netscape') {
+                var ua = navigator.userAgent;
+                var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
+                if (re.exec(ua) != null)
+                    rv = parseFloat( RegExp.$1 );
+            }
+            isIE = rv !== -1 ? true : false
+        })();
+
+
+        // Массив img (для IE)
+        function getImgAll() {
+            var imgIE = [];
+            countIconX = 0;
+            countIconY = 0;
+
+            svgFileNameAll.forEach(function(e, index) {
+                var img = document.createElement("img");
+
+                img.style.cursor = "pointer";
+                img.style.position = "absolute";
+                img.style.width = sizeX + "px";
+                img.style.height = sizeY + "px";
+                img.setAttribute("src", 'img/task/icons/' +  e + '');
+                img.setAttribute("index", index);
+
+                positionX = paddingXY + countIconX * ( 2 * paddingXY + sizeX );
+                positionY = paddingXY + countIconY * ( paddingXY + sizeY );
+
+                arrayX.push(positionX);
+                arrayY.push(positionY);
+
+                img.style.left = positionX + "px";
+                img.style.top  = positionY + "px";
+
+                imgIE.push(img);
+
+                countIconX++;
+
+                if (countIconX === countIconXMax) {
+                    countIconX = 0;
+                    countIconY++;
+                };
+            });
+
+            return imgIE;
+        };
 
 
         // Массив имён файлов иконок
         svgFileNameAll = svgFileNameAll.slice(2);
 
-        svgFileNameAll.forEach(function(e) {
-
-            backImage += "url('img/task/icons/" + e + "'),";
-
-            positionX = paddingXY + countIconX * ( 2 * paddingXY + sizeX );
-            positionY = paddingXY + countIconY * ( paddingXY + sizeY );
-
-            backPosition += positionX + "px " + positionY + "px,";
-
-            arrayX.push(positionX);
-            arrayY.push(positionY);
-
-            countIconX++;
-
-            if (countIconX === countIconXMax) {
-                countIconX = 0;
-                countIconY++;
-            }
-        });
 
 
-        // Убираем последнюю запятую:
-        backImage = backImage.slice(0,-1);
-        backPosition = backPosition.slice(0,-1);
+        if (isIE) {
+        // ===========================================================
+        // IE
+        // ===========================================================
+            for (var i = 0; i < textAreaAll.length; i++) {
+            // for (var i = 0; i < 2; i++) {
+
+                imgIE = getImgAll();
+
+                textAreaAll[i].style.position = "relative";
+                textAreaAll[i].style.cursor = "default";
+                // imgIE.forEach(function(e){
+                //     textAreaAll[i].appendChild(e);
+                // });
+                for (var j = 0; j < imgIE.length; j++) {
+                // for (var j = 0; j < 1; j++) {
+                    textAreaAll[i].appendChild(imgIE[j]);
+                };
 
 
-// document.querySelector('textarea[name="SVG"]:after').style.backgroundImage = "url('img/task/icons/101.svg')";
-// textAreaAll[0].style.backgroundImage = "url('img/task/icons/201.svg')";
-// textAreaAll[0].style.backgroundImage = "url('data:image/svg+xml, img/task/icons/201.svg')";
-// textAreaAll[0].style.backgroundPosition = "15px 15px";
-
-        for (var i = 0; i < textAreaAll.length; i++) {
-        // for (var i = 0; i < 1; i++) {
-
-            // Установка стилей
-            textAreaAll[i].style.backgroundImage = backImage;
-            textAreaAll[i].style.backgroundPosition = backPosition;
-            textAreaAll[i].style.backgroundSize = sizeX + "px " + sizeY + "px";
-            for (var k = 0; k < countIconY; k++) {
-                TxtInnerHTML += "\n";
+                // // Установка событий
+                textAreaAll[i].addEventListener('click', mouseIconClick);
+// textAreaIcon = textAreaAll[i].closest('form').querySelector('textarea[name="icon"]');
+// textAreaIcon.addEventListener('input', iconInput);
             };
-            // textAreaAll[i].innerHTML = TxtInnerHTML;
-            textAreaAll[i].value = TxtInnerHTML;
-            TxtInnerHTML = '';
 
-            // Установка событий
-            textAreaAll[i].addEventListener('click', mouseIconClick);
-            textAreaAll[i].addEventListener('mousemove', mouseIconMove);
+        } else {
+        // ===========================================================
+        // Не IE
+        // ===========================================================
+                svgFileNameAll.forEach(function(e) {
 
-            textAreaIcon = textAreaAll[i].closest('form').querySelector('textarea[name="icon"]');
-            textAreaIcon.addEventListener('input', iconInput);
+                    backImage += "url('img/task/icons/" + e + "'),";
+
+                    positionX = paddingXY + countIconX * ( 2 * paddingXY + sizeX );
+                    positionY = paddingXY + countIconY * ( paddingXY + sizeY );
+
+                    backPosition += positionX + "px " + positionY + "px,";
+
+                    arrayX.push(positionX);
+                    arrayY.push(positionY);
+
+                    countIconX++;
+
+                    if (countIconX === countIconXMax) {
+                        countIconX = 0;
+                        countIconY++;
+                    }
+                });
+
+
+                // Убираем последнюю запятую:
+                backImage = backImage.slice(0,-1);
+                backPosition = backPosition.slice(0,-1);
+
+
+                for (var i = 0; i < textAreaAll.length; i++) {
+
+                    // Установка стилей
+                    textAreaAll[i].style.backgroundImage = backImage;
+                    textAreaAll[i].style.backgroundPosition = backPosition;
+                    textAreaAll[i].style.backgroundSize = sizeX + "px " + sizeY + "px";
+                    for (var k = 0; k < countIconY; k++) {
+                        TxtInnerHTML += "\n";
+                    };
+                    textAreaAll[i].value = TxtInnerHTML;
+                    TxtInnerHTML = '';
+
+                    // Установка событий
+                    textAreaAll[i].addEventListener('click', mouseIconClick);
+                    textAreaAll[i].addEventListener('mousemove', mouseIconMove);
+
+                    // textAreaIcon = textAreaAll[i].closest('form').querySelector('textarea[name="icon"]');
+                    // textAreaIcon.addEventListener('input', iconInput);
+                };
+
         };
-
-
 
         function iconInput(e, textareaIcon) {
             var formName,
@@ -864,7 +954,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
         function mouseIconClick(e) {
-            mouseTextArea(e, 'click');
+            if (isIE) {
+                var index = e.target.getAttribute("index"),
+                    textareaIcon = e.target.closest('form').querySelector('textarea[name="icon"]');
+
+                textareaIcon.value = textareaIcon.innerHTML = 'img/task/icons/' + svgFileNameAll[ index ];
+                iconInput(null, textareaIcon);
+            } else {
+                mouseTextArea(e, 'click');
+            }
         };
 
 
@@ -915,6 +1013,11 @@ document.addEventListener("DOMContentLoaded", function(){
         };
 
     }; // textAriaSVG();
+
+
+
+
+
 
 
 

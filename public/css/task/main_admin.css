@@ -146,10 +146,10 @@ input[type="checkbox"] {
   float: left; }
 
 textarea[name="SVG"] {
-  height: 290px;
+  height: 90px;
   display: block;
   cursor: pointer;
-  font-size: 75px;
+  font-size: 55px;
   overflow: auto;
   background-color: #fff;
   background-repeat: no-repeat;
