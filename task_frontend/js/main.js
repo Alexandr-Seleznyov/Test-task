@@ -59,8 +59,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
             resizeValue; // Функция
 
-        // Для контроля ширины видимой части окна
-        console.log(winSize + ' px - Ширина рабочей области окна');
+// Для контроля ширины видимой части окна
+// console.log(winSize + ' px - Ширина рабочей области окна');
 
         // Функция для определения величины, которая зависит от ширины видимой части окна
         // Например:
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     // ================================================================================
-    // Подгрузка страница, по мере доскролливания
+    // Ajax (Подгрузка страница, по мере доскролливания)
     // ================================================================================
     var service = document.querySelector(".service-content"),
         offer = document.querySelector(".offer-content"),
@@ -211,33 +211,148 @@ document.addEventListener("DOMContentLoaded", function(){
         obj_request,        // Запрс
         obj_response,       // Ответ
         addBlocks,          // Функция добавления html блоков
-        xhr = new XMLHttpRequest();
+        isIE,               // true - значит IE
+        // xhr = new XMLHttpRequest();
+        xhr;
+
+    // Определяем isIE
+    (function() {
+        var rv = -1;
+        if (navigator.appName == 'Microsoft Internet Explorer') {
+            var ua = navigator.userAgent;
+            var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+            if (re.exec(ua) != null)
+                rv = parseFloat( RegExp.$1 );
+        }
+        else if (navigator.appName == 'Netscape') {
+            var ua = navigator.userAgent;
+            var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
+            if (re.exec(ua) != null)
+                rv = parseFloat( RegExp.$1 );
+        }
+        isIE = rv !== -1 ? true : false
+    })();
+
+    xhr = isIE ? new XDomainRequest() : new XMLHttpRequest();
 
 
-    // xhr.timeout = 30000; // Максимальная продолжительность запроса (в миллисекундах)
+    if (isIE) {
 
-    xhr.ontimeout = function() {
-        console.log('Запрос превысил максимальное время.');
+        xhr.onload = function() {
+            // ========================================================
+            // Выполнение ПОСЛЕ завершения Ajax запроса  IE
+            // ========================================================
+            isLoading = false;
+            obj_response = JSON.parse(xhr.responseText);
+
+            addBlocks(obj_response);
+            windowResize();
+
+            // ВАЖНО, иначе всё печально...
+            setTimeout(window.onscroll, 1);
+        };
+
+        xhr.onerror = function() {
+            console.log('Ошибочка');
+        };
+
+    } else {
+
+        xhr.timeout = 10000; // Максимальная продолжительность запроса (в миллисекундах)
+
+        xhr.ontimeout = function() {
+            console.log('Запрос превысил максимальное время.');
+        };
+
+        xhr.onreadystatechange = function() {
+            // ========================================================
+            // Выполнение ПОСЛЕ завершения Ajax запроса  НЕ IE
+            // ========================================================
+            if (xhr.readyState != 4) return false;
+
+            if (xhr.status != 200) {
+                console.log('Ошибка');
+            } else {
+                obj_response = JSON.parse(xhr.responseText);
+            };
+
+            isLoading = false;
+            addBlocks(obj_response);
+            windowResize();
+            window.onscroll();
+        };
+
     };
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState != 4) return false;
 
-        if (xhr.status != 200) {
-            console.log('Ошибка');
+
+
+    window.onscroll = function() {
+
+        if ( (!isService && !isOffer) || isLoading ) {
+            return false;
+        }
+
+        windHeight = document.documentElement.clientHeight;;
+        pageHeight = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        );
+        scrollTop = window.pageYOffset;
+
+        if ((pageHeight - scrollTop) >= windHeight * 1.8) {
+            return false;
+        }
+
+        if (isService) {
+
+            limit = countService > 0 ? 1 : 5;
+            obj_request = {
+                method: 'getServices',
+                limit: limit,
+                offset: countService
+            };
+            countService += limit;
+
         } else {
-            obj_response = JSON.parse(xhr.responseText);
-            // console.log('Данные получены!');
+
+            limit = 1;
+            obj_request = {
+                method: 'getOffers',
+                limit: limit,
+                offset: countOffer
+            };
+            countOffer += limit;
+
         };
 
         // ========================================================
-        // Выполнение ПОСЛЕ завершения Ajax запроса
+        // Ajax запрос
         // ========================================================
-        isLoading = false;
-        addBlocks(obj_response);
-        windowResize();
-        window.onscroll();
+        if (isLoading) {
+            return false;
+        };
+        isLoading = true;
+
+        if (isIE) {
+
+            xhr.timeout = 10000;
+            xhr.open('POST', 'api', true);
+            xhr.send(JSON.stringify(obj_request));
+
+        } else {
+
+            xhr.open('POST', 'api', true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            xhr.send(JSON.stringify(obj_request));
+
+        };
+
     };
+
+
+
 
     addBlocks = function(obj_response) {
 
@@ -271,70 +386,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
     };
 
-
-
-
-
-
-    window.onscroll = function() {
-
-        if ( (!isService && !isOffer) || isLoading ) {
-            return false;
-        }
-
-        windHeight = document.documentElement.clientHeight;;
-        pageHeight = Math.max(
-            document.body.scrollHeight, document.documentElement.scrollHeight,
-            document.body.offsetHeight, document.documentElement.offsetHeight,
-            document.body.clientHeight, document.documentElement.clientHeight
-        );
-        scrollTop = window.pageYOffset;
-
-        // if ((pageHeight - scrollTop) >= windHeight * 2) {
-        if ((pageHeight - scrollTop) >= windHeight * 1.8) {
-            return false;
-        }
-
-        // ========================================================
-        // Выполнение ДО Ajax запроса
-        // ========================================================
-        if (isLoading) {
-            return false;
-        };
-
-        isLoading = true;
-
-        if (isService) {
-
-            limit = countService > 0 ? 1 : 5;
-            obj_request = {
-                method: 'getServices',
-                limit: limit,
-                offset: countService
-            };
-            countService += limit;
-
-        } else {
-
-            limit = 1;
-            obj_request = {
-                method: 'getOffers',
-                limit: limit,
-                offset: countOffer
-            };
-            countOffer += limit;
-
-        };
-
-        // ========================================================
-        // Ajax запрос
-        // ========================================================
-        // console.log('Загружаются данные ...');
-        xhr.open('POST', 'api', true);
-        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-        xhr.send(JSON.stringify(obj_request));
-
-    };
 
     window.onscroll();
 

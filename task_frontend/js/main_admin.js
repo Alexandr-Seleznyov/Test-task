@@ -5,6 +5,19 @@ document.addEventListener("DOMContentLoaded", function(){
     // ================================================================================
     // Полифилы:
     // ================================================================================
+
+    // matches
+    (function(e){
+        e.matches || (e.matches = e.matchesSelector||function(selector){
+            var matches = document.querySelectorAll(selector),
+                th = this;
+            return Array.prototype.some.call(matches, function(e){
+                return e === th;
+            });
+        });
+    })(Element.prototype);
+
+
     // closest
     (function() {
         // проверяем поддержку
@@ -21,18 +34,6 @@ document.addEventListener("DOMContentLoaded", function(){
             };
         };
     })();
-
-
-    // matches
-    (function(e){
-        e.matches || (e.matches = e.matchesSelector||function(selector){
-            var matches = document.querySelectorAll(selector),
-                th = this;
-            return Array.prototype.some.call(matches, function(e){
-                return e === th;
-            });
-        });
-    })(Element.prototype);
 
 
     // remove
@@ -294,7 +295,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
                             '<h3>Icon:</h3>' +
                             '<textarea rows="1" maxlength="191" name="icon">' + e.result[i].icon + '</textarea>' +
-                            '<textarea rows="1" readonly name="SVG">&#013;</textarea>' +
+                            '<textarea rows="1" readonly name="SVG"  value="\n"></textarea>' +
                             '<input type="submit" name="add" value="Insert"/>' +
                             '<input type="submit" name="set" value="Update"/>' +
                             '<input type="submit" name="del" value="Delete"/>' +
@@ -335,7 +336,7 @@ document.addEventListener("DOMContentLoaded", function(){
                             '<textarea rows="4" name="description">' + e.result[i].description + '</textarea>' +
                             '<h3>Icon:</h3>' +
                             '<textarea rows="1" maxlength="191" name="icon">' + e.result[i].icon + '</textarea>' +
-                            '<textarea rows="1" readonly name="SVG">&#013;</textarea>' +
+                            '<textarea rows="1" readonly name="SVG"  value="\n"></textarea>' +
                             '<input type="submit" name="add" value="Insert"/>' +
                             '<input type="submit" name="set" value="Update"/>' +
                             '<input type="submit" name="del" value="Delete"/>' +
@@ -757,14 +758,14 @@ document.addEventListener("DOMContentLoaded", function(){
             positionY,
             countIconX = 0,
             countIconY = 0,
-            countIconXMax = 6,
+            countIconXMax = 5,
             TxtInnerHTML = '',
             arrayX = [],
             arrayY = [],
 
             // Параметры иконок (CSS) (значения в px):
-            sizeX = 50,
-            sizeY = 50,
+            sizeX = 71,
+            sizeY = 71,
             paddingXY = 15,
             backImage = '',
             backPosition = '';
@@ -773,10 +774,9 @@ document.addEventListener("DOMContentLoaded", function(){
         // Массив имён файлов иконок
         svgFileNameAll = svgFileNameAll.slice(2);
 
+        svgFileNameAll.forEach(function(e) {
 
-        svgFileNameAll.forEach(function(e){
-
-            backImage += "url(img/task/icons/" + e + "),";
+            backImage += "url('img/task/icons/" + e + "'),";
 
             positionX = paddingXY + countIconX * ( 2 * paddingXY + sizeX );
             positionY = paddingXY + countIconY * ( paddingXY + sizeY );
@@ -794,11 +794,20 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         });
 
+
         // Убираем последнюю запятую:
         backImage = backImage.slice(0,-1);
         backPosition = backPosition.slice(0,-1);
 
+
+// document.querySelector('textarea[name="SVG"]:after').style.backgroundImage = "url('img/task/icons/101.svg')";
+// textAreaAll[0].style.backgroundImage = "url('img/task/icons/201.svg')";
+// textAreaAll[0].style.backgroundImage = "url('data:image/svg+xml, img/task/icons/201.svg')";
+// textAreaAll[0].style.backgroundPosition = "15px 15px";
+
         for (var i = 0; i < textAreaAll.length; i++) {
+        // for (var i = 0; i < 1; i++) {
+
             // Установка стилей
             textAreaAll[i].style.backgroundImage = backImage;
             textAreaAll[i].style.backgroundPosition = backPosition;

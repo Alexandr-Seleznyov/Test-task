@@ -35,8 +35,7 @@ gulp.task('browserSync', function() {
 gulp.task("scss", function () {
   gulp.src(path_scss_from)
     .pipe(scss().on('error', scss.logError))
-    // .pipe(sass({outputStyle: 'compressed'})) // Сжатие css
-    .pipe(scss({outputStyle: 'compressed'})) // Сжатие css
+    // .pipe(scss({outputStyle: 'compressed'})) // Сжатие css
     // .pipe(cssmin())
     .pipe(gulp.dest(path_css_to))
     .pipe(browserSync.reload({stream:true}));

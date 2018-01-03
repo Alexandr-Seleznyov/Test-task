@@ -7,6 +7,7 @@
     <meta name="keywords" content=<?= '"'.$mainInfo[0]['keywords'].'"' ?>>
     <link rel="stylesheet" href="css/task/main.css">
     <script src="js/task/main.js"></script>
+
 </head>
 <body>
 <div class="container">

@@ -50,7 +50,7 @@ class TaskBlockServiceTableSeeder extends Seeder
             'order' => 1,
             'href' => '',
             'description' => '<span>Development</span><br>of the acquisition or<br>sales strategy',
-            'icon' => 'img/task/icons/001.svg',
+            'icon' => 'img/task/icons/201.svg',
             // 'created_at' => DB::raw('CURRENT_TIMESTAMP'),
             // 'created_at' => DB::raw('NOW()'),
         ]);
@@ -59,63 +59,63 @@ class TaskBlockServiceTableSeeder extends Seeder
             'order' => 2,
             'href' => '',
             'description' => '<span>Company analysis,</span><br>preparation of the investment<br>memorandum',
-            'icon' => 'img/task/icons/002.svg',
+            'icon' => 'img/task/icons/202.svg',
         ]);
 
         BlockService::create([
             'order' => 3,
             'href' => '',
             'description' => 'Undertaking comprehensive<br><span>industry and market</span><br><span>researches</span>',
-            'icon' => 'img/task/icons/003.svg',
+            'icon' => 'img/task/icons/203.svg',
         ]);
 
         BlockService::create([
             'order' => 4,
             'href' => '',
             'description' => '<span>Identifying transaction</span><br><span>opportunities</span><br>based on a client’s objectives<br>and strategy',
-            'icon' => 'img/task/icons/004.svg',
+            'icon' => 'img/task/icons/204.svg',
         ]);
 
         BlockService::create([
             'order' => 5,
             'href' => '',
             'description' => 'Determining an<br><span>appropriate valuation</span><br>for the businesses, facilities<br>and other assets',
-            'icon' => 'img/task/icons/005.svg',
+            'icon' => 'img/task/icons/205.svg',
         ]);
 
         BlockService::create([
             'order' => 6,
             'href' => '',
             'description' => 'Serving as a intermediary in<br><span>negotiations</span><br>with any level of complexity to get<br>the best possible price and terms',
-            'icon' => 'img/task/icons/006.svg',
+            'icon' => 'img/task/icons/206.svg',
         ]);
 
         BlockService::create([
             'order' => 7,
             'href' => '',
             'description' => '<span>Providing counsel</span><br>to the clients in helping secure<br>acquisitions, leading the due<br>diligence process',
-            'icon' => 'img/task/icons/007.svg',
+            'icon' => 'img/task/icons/207.svg',
         ]);
 
         BlockService::create([
             'order' => 8,
             'href' => '',
             'description' => 'Negotiating the<br><span>relevant legal documents,</span><br>drafting contracts<br>and legal documentation',
-            'icon' => 'img/task/icons/008.svg',
+            'icon' => 'img/task/icons/208.svg',
         ]);
 
         BlockService::create([
             'order' => 9,
             'href' => '',
             'description' => '<span>Managing PR</span><br><span>and reputation</span><br>around the transaction',
-            'icon' => 'img/task/icons/009.svg',
+            'icon' => 'img/task/icons/209.svg',
         ]);
 
         BlockService::create([
             'order' => 10,
             'href' => '',
             'description' => 'Continuing advice<br>and support during the<br><span>post-acquisition period</span>',
-            'icon' => 'img/task/icons/010.svg',
+            'icon' => 'img/task/icons/210.svg',
         ]);
 
     }

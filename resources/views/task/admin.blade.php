@@ -5,7 +5,6 @@
             if (!isset($result[$i])) {
                 $result[$i] = '';
             }
-            // $result[$i] = strip_tags($result[$i]);
         }
         return $result;
     };
@@ -21,6 +20,12 @@
     <title>Admin</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/task/main_admin.css">
+    <script> 
+        var svgFileNameAll = [];
+        "<?php foreach ($fileNameAll as $file) { ?>"
+                svgFileNameAll.push("<?= $file ?>");
+        "<?php } ?>";
+    </script>
     <script src="js/task/main_admin.js"></script>
 </head>
 <body>
@@ -93,7 +98,7 @@
 
                     <h3>Icon:</h3>
                     <textarea rows="1" maxlength="191" name="icon"><?= $bs['icon'] ?></textarea>
-                    <textarea rows="1" readonly name="SVG">&#013;</textarea>
+                    <textarea rows="1" readonly name="SVG" value="\n"></textarea>
                     <input type="submit" name="add" value="Insert"/>
                     <input type="submit" name="set" value="Update"/>
                     <input type="submit" name="del" value="Delete"/>
@@ -134,7 +139,7 @@
                     <textarea rows="4" name="description"><?= $bo['description'] ?></textarea>
                     <h3>Icon:</h3>
                     <textarea rows="1" maxlength="191" name="icon"><?= $bo['icon'] ?></textarea>
-                    <textarea rows="1" readonly name="SVG">&#013;</textarea>
+                    <textarea rows="1" readonly name="SVG" value="\n"></textarea>
                     <input type="submit" name="add" value="Insert"/>
                     <input type="submit" name="set" value="Update"/>
                     <input type="submit" name="del" value="Delete"/>
@@ -148,14 +153,6 @@
     </div>
 
 </div>
-
-<script> 
-    var svgFileNameAll = [];
-    "<?php foreach ($fileNameAll as $file) { ?>"
-            svgFileNameAll.push("<?php echo $file ?>");
-    "<?php } ?>";
-</script>
-
 
 </body>
 </html>

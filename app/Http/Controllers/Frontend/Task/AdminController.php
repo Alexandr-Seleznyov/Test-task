@@ -44,6 +44,7 @@ class AdminController extends Controller
     public function api($data)
     {
         $taskApi = TaskApi::initial($data);
+        Header('Access-Control-Allow-Origin: *');
         echo $taskApi->getJsonString();
     }
 

@@ -1,1 +1,220 @@
-@import url(reset.css);.service-block{min-width:141px;display:inline-block;vertical-align:top}.service-block a{display:inline-block}.service-block a img{display:block;margin:auto;height:70px}.service-block .txt{font-family:ProximaNovaSemibold, Arial;color:#585858;text-align:center;letter-spacing:-1px;line-height:24px}.service-block .txt span{font-family:ProximaNovaExtraBold, Arial;color:#000}.offer-block{height:100%;display:inline-block;vertical-align:top;padding-bottom:66px;min-width:282px}.offer-block .wrapper a{display:inline-block;height:107px;width:107px;margin-left:5px;background:url(../../img/task/Ellipse_our_offer.svg) no-repeat;background-size:105px}.offer-block .wrapper a img{display:block;margin:auto;height:50px;margin-top:25px}.offer-block .wrapper .txt{padding-top:39px;font-family:ProximaNovaSemibold, Arial;font-size:18.5px;color:#585858;line-height:25px}.offer-block .wrapper .txt span{font-family:ProximaNovaExtraBold, Arial;font-size:22px;color:#000}*{transition:all .2s}body{font-family:ProximaNovaExtraBold, Arial}@font-face{font-family:ProximaNovaSemibold;src:url(../../fonts/task/ProximaNovaSemiBold/proximanova-semibold.woff)}@font-face{font-family:ProximaNovaBold;src:url(../../fonts/task/ProximaNovaBold/proximanova-bold.woff)}@font-face{font-family:ProximaNovaExtraBold;src:url(../../fonts/task/ProximaNovaExtraBold/proximanova-extrabold.ttf)}h1{display:block;max-width:570px;font-size:20px;margin:auto}h3{font-family:ProximaNovaBold, Arial;font-size:15px}.container{margin:25px;padding-top:30px}.container .selected{display:block}.header{position:fixed;top:0;width:100%;margin-left:-25px;padding:10px 0;background:#fff;border-bottom:2px solid #A3A3A3}.header .menu{display:block;height:30px;width:400px;margin:auto}.header .menu li{float:left;display:block;margin-left:50px;margin-top:4px}.header .menu li p{font-size:20px;cursor:pointer}.header .menu li .selected{color:#00ac98}input[type="submit"]{width:150px;height:40px;margin:10px;border-radius:5px;font-family:ProximaNovaBold, Arial;font-size:20px}input[name="del"]{color:#990000}div[class*="-info"]{display:none;border:1px solid #E0E0E0;padding:20px;background:#F7F7F7}textarea,input[type="text"],input[type="number"],input[type="url"]{overflow:hidden;display:block;width:100%;margin-top:5px;margin-bottom:15px;font-family:ProximaNovaSemibold, Arial;font-size:14px;color:#5C5C5C}textarea[name="icon"],.service-info textarea[name="description"],.offer-info textarea[name="description"]{display:none}textarea[name*="description"]{width:50%}input[name="order"]{width:20%}input[type="checkbox"]{float:left}textarea[name="SVG"]{height:90px;display:block;cursor:pointer;font-size:60px;overflow:auto;background-color:#fff;background-repeat:no-repeat;background-attachment:local}.message{display:block;height:25px;margin-top:10px;padding-left:10px;color:#17084C;font-family:ProximaNovaSemibold, Arial;font-size:14px;line-height:25px;border:1px solid #E0E0E0}.main-wrapper{max-width:570px;margin:auto}.offer-block{padding-bottom:20px}.service,.offer{border:1px solid #A3A3A3;overflow:hidden;width:570px;padding:30px;margin:20px auto;background:#fff}.service .result,.offer .result{width:170px;min-height:220px;float:left;margin-right:20px;margin-bottom:10px}.service .result .service-block,.offer .result .service-block{width:100%}.service .result .service-block a,.offer .result .service-block a{margin-top:20px;margin-bottom:30px}.service .edit,.offer .edit{float:left;display:inline-block;padding:20px;border:1px solid #E0E0E0;background:#F7F7F7}.offer .result{width:100%}.offer .result .offer-block{width:100%}.service:after{display:block;content:'';height:0;clear:both}.offer:after{display:block;content:'';height:0;clear:both}.offer-info{display:none;border:1px solid red}
+@import url(reset.css);
+.service-block {
+  min-width: 141px;
+  display: inline-block;
+  vertical-align: top; }
+  .service-block a {
+    display: inline-block; }
+    .service-block a img {
+      display: block;
+      margin: auto;
+      height: 70px; }
+  .service-block .txt {
+    font-family: ProximaNovaSemibold, Arial;
+    color: #585858;
+    text-align: center;
+    letter-spacing: -1px;
+    line-height: 24px; }
+    .service-block .txt span {
+      font-family: ProximaNovaExtraBold, Arial;
+      color: #000; }
+
+.offer-block {
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  padding-bottom: 66px;
+  min-width: 282px; }
+  .offer-block .wrapper a {
+    display: inline-block;
+    height: 107px;
+    width: 107px;
+    margin-left: 5px;
+    background: url(../../img/task/Ellipse_our_offer.svg) no-repeat;
+    background-size: 105px; }
+    .offer-block .wrapper a img {
+      display: block;
+      margin: auto;
+      height: 50px;
+      margin-top: 25px; }
+  .offer-block .wrapper .txt {
+    padding-top: 39px;
+    font-family: ProximaNovaSemibold, Arial;
+    font-size: 18.5px;
+    color: #585858;
+    line-height: 25px; }
+    .offer-block .wrapper .txt span {
+      font-family: ProximaNovaExtraBold, Arial;
+      font-size: 22px;
+      color: #000; }
+
+* {
+  transition: all .2s; }
+
+body {
+  font-family: ProximaNovaExtraBold, Arial; }
+
+@font-face {
+  font-family: ProximaNovaSemibold;
+  src: url(../../fonts/task/ProximaNovaSemiBold/proximanova-semibold.woff); }
+
+@font-face {
+  font-family: ProximaNovaBold;
+  src: url(../../fonts/task/ProximaNovaBold/proximanova-bold.woff); }
+
+@font-face {
+  font-family: ProximaNovaExtraBold;
+  src: url(../../fonts/task/ProximaNovaExtraBold/proximanova-extrabold.ttf); }
+
+h1 {
+  display: block;
+  max-width: 570px;
+  font-size: 20px;
+  margin: auto; }
+
+h3 {
+  font-family: ProximaNovaBold, Arial;
+  font-size: 15px; }
+
+.container {
+  margin: 25px;
+  padding-top: 30px; }
+  .container .selected {
+    display: block; }
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  margin-left: -25px;
+  padding: 10px 0;
+  background: #fff;
+  border-bottom: 2px solid #A3A3A3; }
+  .header .menu {
+    display: block;
+    height: 30px;
+    width: 400px;
+    margin: auto; }
+    .header .menu li {
+      float: left;
+      display: block;
+      margin-left: 50px;
+      margin-top: 4px; }
+      .header .menu li p {
+        font-size: 20px;
+        cursor: pointer; }
+      .header .menu li .selected {
+        color: #00ac98; }
+
+input[type="submit"] {
+  width: 150px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  font-family: ProximaNovaBold, Arial;
+  font-size: 20px; }
+
+input[name="del"] {
+  color: #990000; }
+
+div[class*="-info"] {
+  display: none;
+  border: 1px solid #E0E0E0;
+  padding: 20px;
+  background: #F7F7F7; }
+
+textarea, input[type="text"], input[type="number"], input[type="url"] {
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-family: ProximaNovaSemibold, Arial;
+  font-size: 14px;
+  color: #5C5C5C; }
+
+textarea[name="icon"], .service-info textarea[name="description"], .offer-info textarea[name="description"] {
+  display: none; }
+
+textarea[name*="description"] {
+  width: 50%; }
+
+input[name="order"] {
+  width: 20%; }
+
+input[type="checkbox"] {
+  float: left; }
+
+textarea[name="SVG"] {
+  height: 290px;
+  display: block;
+  cursor: pointer;
+  font-size: 75px;
+  overflow: auto;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-attachment: local; }
+
+.message {
+  display: block;
+  height: 25px;
+  margin-top: 10px;
+  padding-left: 10px;
+  color: #17084C;
+  font-family: ProximaNovaSemibold, Arial;
+  font-size: 14px;
+  line-height: 25px;
+  border: 1px solid #E0E0E0; }
+
+.main-wrapper {
+  max-width: 570px;
+  margin: auto; }
+
+.offer-block {
+  padding-bottom: 20px; }
+
+.service, .offer {
+  border: 1px solid #A3A3A3;
+  overflow: hidden;
+  width: 570px;
+  padding: 30px;
+  margin: 20px auto;
+  background: #fff; }
+  .service .result, .offer .result {
+    width: 170px;
+    min-height: 220px;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px; }
+    .service .result .service-block, .offer .result .service-block {
+      width: 100%; }
+      .service .result .service-block a, .offer .result .service-block a {
+        margin-top: 20px;
+        margin-bottom: 30px; }
+  .service .edit, .offer .edit {
+    float: left;
+    display: inline-block;
+    padding: 20px;
+    border: 1px solid #E0E0E0;
+    background: #F7F7F7; }
+
+.offer .result {
+  width: 100%; }
+  .offer .result .offer-block {
+    width: 100%; }
+
+.service:after {
+  display: block;
+  content: '';
+  height: 0;
+  clear: both; }
+
+.offer:after {
+  display: block;
+  content: '';
+  height: 0;
+  clear: both; }
+
+.offer-info {
+  display: none;
+  border: 1px solid red; }
