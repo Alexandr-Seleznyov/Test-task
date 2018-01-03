@@ -76,6 +76,9 @@ h3 {
                 font-size: 20px;
                 cursor: pointer;
             }
+            p:hover {
+                padding-top: 3px;
+            }
             .selected {
                 color: $color-main;
             }

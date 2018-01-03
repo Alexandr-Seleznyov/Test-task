@@ -1,6 +1,25 @@
 'use strict';
 
 document.addEventListener("DOMContentLoaded", function(){
+    var isIE; // true - значит IE
+
+    // Определяем isIE
+    (function() {
+        var rv = -1;
+        if (navigator.appName == 'Microsoft Internet Explorer') {
+            var ua = navigator.userAgent;
+            var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+            if (re.exec(ua) != null)
+                rv = parseFloat( RegExp.$1 );
+        }
+        else if (navigator.appName == 'Netscape') {
+            var ua = navigator.userAgent;
+            var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
+            if (re.exec(ua) != null)
+                rv = parseFloat( RegExp.$1 );
+        }
+        isIE = rv !== -1 ? true : false
+    })();
 
     // ================================================================================
     // Полифилы:
@@ -447,37 +466,92 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     AjaxAPI = function(data, form, isFile) {
-        var xhr = new XMLHttpRequest(),
+        var xhr,
             obj_response,
             message = form.querySelector(".message");
+
+        xhr = isIE ? new XDomainRequest() : new XMLHttpRequest();
 
         function massegeUpdate(){
             message.innerHTML = obj_response.description;
             message.style.color = obj_response.result === 0 ? "#8F0000" : "#2E8200";
         };
 
-        // xhr.timeout = 30000; // Максимальная продолжительность запроса (в миллисекундах)
 
-        xhr.ontimeout = function() {
-            console.log('Запрос превысил максимальное время.');
-        };
+        if (isIE) {
 
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState != 4) return;
-
-            if (xhr.status != 200) {
-                console.log('Ошибка');
-            } else {
-
+            xhr.onload = function() {
+                // ========================================================
+                // Выполнение ПОСЛЕ завершения Ajax запроса  IE
+                // ========================================================
+                isLoading = false;
                 obj_response = JSON.parse(xhr.responseText);
-                // console.log('Данные получены!');
+
+                // Обработка ответа
+                afterAjax(obj_response, form);
+
             };
 
-            // ========================================================
-            // Выполнение ПОСЛЕ завершения Ajax запроса
-            // ========================================================
-            isLoading = false;
-            // Обработка ответа
+            xhr.onerror = function() {
+                console.log('Ошибочка');
+            };
+
+        } else {
+
+            xhr.timeout = 30000; // Максимальная продолжительность запроса (в миллисекундах)
+
+            xhr.ontimeout = function() {
+                console.log('Запрос превысил максимальное время.');
+            };
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) return;
+
+                if (xhr.status != 200) {
+                    console.log('Ошибка');
+                } else {
+
+                    obj_response = JSON.parse(xhr.responseText);
+                    // console.log('Данные получены!');
+                };
+
+                // ========================================================
+                // Выполнение ПОСЛЕ завершения Ajax запроса
+                // ========================================================
+                isLoading = false;
+
+                // Обработка ответа
+                afterAjax(obj_response, form);
+            };
+        };
+
+
+
+
+        // ========================================================
+        // Ajax запрос
+        // ========================================================
+        if (isLoading) {
+            return false;
+        };
+        isLoading = true;
+        if (isIE) {
+
+            xhr.timeout = 10000;
+            xhr.open('POST', 'api', true);
+            xhr.send(JSON.stringify(obj_request));
+
+        } else {
+
+            xhr.open('POST', 'api', true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            xhr.send(JSON.stringify(data));
+
+        };
+
+
+        // Обработка ответа
+        function afterAjax(obj_response, form) {
             switch (obj_response.method) {
                 case 'setMainInfo' :
                     massegeUpdate();
@@ -520,25 +594,10 @@ document.addEventListener("DOMContentLoaded", function(){
                 case 'removeOfferID' :
                     removeServiceOfferView(obj_response, 'offer'); // Удаление блока со страницы
                     break;
-            }
-
-            // Обновить блок
-
+            };
         };
 
-        // ========================================================
-        // Ajax запрос
-        // ========================================================
-        if (isLoading) {
-            return false;
-        };
-        isLoading = true;
-        // console.log('Загружаются данные ...');
-        xhr.open('POST', 'api', true);
-        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-        xhr.send(JSON.stringify(data));
-    };
-
+    }; // AjaxAPI
 
 
 
@@ -773,28 +832,8 @@ document.addEventListener("DOMContentLoaded", function(){
             sizeY = 50,
             paddingXY = 15,
             backImage = '',
-            backPosition = '',
-            isIE;               // true - значит IE
+            backPosition = '';
 
-
-
-        // Определяем isIE
-        (function() {
-            var rv = -1;
-            if (navigator.appName == 'Microsoft Internet Explorer') {
-                var ua = navigator.userAgent;
-                var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-                if (re.exec(ua) != null)
-                    rv = parseFloat( RegExp.$1 );
-            }
-            else if (navigator.appName == 'Netscape') {
-                var ua = navigator.userAgent;
-                var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
-                if (re.exec(ua) != null)
-                    rv = parseFloat( RegExp.$1 );
-            }
-            isIE = rv !== -1 ? true : false
-        })();
 
 
         // Массив img (для IE)
