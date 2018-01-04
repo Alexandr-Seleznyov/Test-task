@@ -206,7 +206,8 @@ textarea[name="SVG"] {
 .offer .result {
   width: 100%; }
   .offer .result .offer-block {
-    width: 100%; }
+    width: 100%;
+    height: auto; }
 
 .service:after {
   display: block;
